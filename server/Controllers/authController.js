@@ -33,10 +33,11 @@ authController.getUser = (req, res, next) => {
 
 authController.getProfile = async (req, res, next) => {
   const { username } = req.params;
-  const queryText = 'SELECT * FROM Users WHERE username=$1';
+  const queryText = 'SELECT * FROM Users WHERE "username" = $1';
   try {
     const userData = await model.query(queryText, [username]);
     [res.locals.userData] = userData.rows;
+    console.log('res.locals.userData', userData.rows);
     return next();
   } catch (err) {
     console.log(err);

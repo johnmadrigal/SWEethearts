@@ -43,7 +43,7 @@ const NavigateBar = ({ authStatus, setAuthStatus }) => {
                 Submit Idea
               </span>
             </Link>
-            <Link to="/profile">
+            <Link to={`/profile/${username}`}>
               <span className="nav-link" style={styles}>
                 Profile
               </span>

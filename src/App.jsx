@@ -57,7 +57,12 @@ const App = () => {
           <Route exact authStatus={authStatus} component={IdeaPage} path="/idea/:id" />
           <Route exact path="/messages" render={() => <Messages authStatus={authStatus} />} />
           <Route exact path="/submit" render={() => <SubmitIdea authStatus={authStatus} />} />
-          <Route exact path="/profile" render={() => <Profile authStatus={authStatus} />} />
+          <Route
+            exact
+            path={`/profile/${authStatus.username}`}
+            render={() => <Profile authStatus={authStatus} />}
+          />
+          <Route exact component={EditProfile} path="/editprofile" />
           <Route component={NoMatch} />
         </Switch>
       </>

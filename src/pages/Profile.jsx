@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Col, Row, Button } from 'react-bootstrap';
+import { Container, Col, Row, Button, Card } from 'react-bootstrap';
 import Spinner from '../components/Spinner';
 import '../styles/user-profile.scss';
 
@@ -36,8 +36,10 @@ const Profile = (props) => {
   const getUser = async () => {
     // Get all existing user data, sending username as a parameter
     const res = await fetch(`/api/profile/${creatorName}`);
+    // console.log('res', res);
     // Expect in response an object with all User table column properties
     const userTableData = await res.json();
+    console.log('UTD', userTableData);
     setUserData(userTableData);
   };
 
@@ -65,6 +67,20 @@ const Profile = (props) => {
   return (
     <Container id="userProfileContainer">
       <Row className="mb-4" id="row1">
+        <Card className="m-3" id="card" style={{ width: '20rem' }}>
+          <Card.Img src={userData.profilepic} variant="top" />
+          <Card.Body>
+            <Card.Title>{username}</Card.Title>
+            <Card.Text style={{ fontWeight: 300 }}>First Name: {userData.firstname}</Card.Text>
+            <Card.Text style={{ fontWeight: 300 }}>Last Name: {userData.lastname}</Card.Text>
+            <Card.Text style={{ fontWeight: 300 }}>About: {userData.about}</Card.Text>
+            <Card.Text style={{ fontWeight: 300 }}>Github: {userData.githubhandle}</Card.Text>
+            <Card.Text style={{ fontWeight: 300 }}>LinkedIn: {userData.linkedin}</Card.Text>
+            <Card.Text style={{ fontWeight: 300 }}>
+              Personal Page: {userData.personalpage}
+            </Card.Text>
+          </Card.Body>
+        </Card>
         <h3>{creatorName}'s Developer Profile</h3>
         <img
           alt="profile pic"
